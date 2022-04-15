@@ -6,7 +6,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage[backend=biber]{biblatex}
+\usepackage[backend=biber,style=numeric,maxbibnames=9]{biblatex}
 \addbibresource{bibliography.bib}
 \begin{document}
 \pagenumbering{gobble}
@@ -34,11 +34,12 @@
 
 \normalsize
 
-Structural parameter identifiability helps assessing one's ability to extract valuable information from experimental data prior to performing experiments. For mathematical models defined as ordinary differential equations (ODE), we wish to determine which parameters can be identified assuming sufficiently strong inputs and noiseless outputs. As a result, a parameter can be identified uniquely or up to finitely many values. These cases correspond to \emph{global} and \emph{local} structural identifiability scenarios, respectively. When neither situation occurs, a parameter is said to be \emph{unidentifiable}. To remedy this, we seek functions of parameters that are globally identifiable.
+
+Structural parameter identifiability helps assess one's ability to extract valuable information from experimental data prior to performing experiments. For mathematical models defined as ordinary differential equations (ODE), we wish to determine which parameters can be identified assuming sufficiently strong inputs and noiseless outputs. As a result, a parameter can be identified uniquely or up to finitely many values. These cases correspond to \emph{global} and \emph{local} structural identifiability scenarios, respectively. When neither situation occurs, a parameter is said to be \emph{unidentifiable}. To remedy this, we seek functions of parameters that are globally identifiable.
 
 In this talk, we will present a web-based identifiability toolbox build entirely in Maple programming language. The software we will discuss relies primarily on the interaction between two algorithms for structural identifiability. Local and global structural identifiability of individual parameters are determined via Structural Identifiability Analyzer (SIAN) \cite{hong_global_2020,hong_sian_2019}, a Monte-Carlo algorithm with user-specified probability of correctness.
 
-To remedy non-identifiable cases, the algorithm based on \cite{ovchinnikov2020computing,ovchinnikov2020multi} provides a way to find functions of parameters that are globally identifiable. Two algorithms are built in such a way that interacting between them allows one to obtain results quickly, efficiently, and without any extra steps such as installation. We will showcase the main
+To remedy non-identifiable cases, the algorithm based on \cite{ovchinnikov2020computing,ovchinnikov2020multi} provides a way to find functions of parameters that are globally identifiable. Two algorithms are built in such a way that the interaction between them allows one to obtain results quickly, efficiently, and without any extra steps such as installation. We will showcase the main
 
 \printbibliography{}
 \end{document}
