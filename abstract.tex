@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass[10pt, a4paper]{article}
 %\usepackage{simplemargins}
 \usepackage{a4wide}
 %\usepackage[square]{natbib}
@@ -23,14 +23,14 @@
 \maketitle{}
 \pagenumbering{gobble}
 
-\hspace{10pt}
+% \hspace{10pt}
 
 \normalsize
 
 
-Structural parameter identifiability helps assess one's ability to extract valuable information from experimental data prior to performing experiments. For mathematical models defined as ordinary differential equations (ODE), we wish to determine which parameters can be identified assuming sufficiently strong inputs and noiseless outputs. As a result, a parameter can be identified uniquely or up to finitely many values. These cases correspond to \emph{global} and \emph{local} structural identifiability scenarios, respectively. When neither situation occurs, a parameter is said to be \emph{unidentifiable}. To remedy this, we seek functions of parameters that are globally identifiable.
+Structural parameter identifiability is a property of mathematical models. It can tell us if we are able to estimate model parameters from experimental data prior to performing experiments. For mathematical models defined as ordinary differential equations (ODE), we wish to determine which parameters can be identified assuming sufficiently strong inputs and noiseless outputs. As a result, a parameter can be identified uniquely or up to finitely many values. These cases correspond to \emph{global} and \emph{local} structural identifiability, respectively. When neither situation occurs, a parameter is said to be \emph{non-identifiable}. To remedy this, we seek functions of parameters that are globally identifiable.
 
-In this talk, we will present a web-based identifiability toolbox build entirely in Maple programming language. The application relies on two algorithms for structural identifiability. Local and global structural identifiability of individual parameters are determined via Structural Identifiability Analyzer (SIAN) \cite{hong_global_2020,hong_sian_2019}, a Monte-Carlo algorithm with user-specified probability of correctness. To remedy non-identifiable cases, the algorithm based on \cite{ovchinnikov2020computing,ovchinnikov2020multi} provides a way to find functions of parameters that are globally identifiable. To maximize performance, we will showcase how algorithm for identifiable combinations can utilize individual parameter identifiability properties. We will showcase the application by applying it to several pharmacological ODE models.
+In this talk, we will present a web-based identifiability toolbox build entirely in Maple programming language. The application relies on two algorithms for structural identifiability. Local and global structural identifiability of individual parameters are determined via Structural Identifiability Analyzer (SIAN) \cite{hong_global_2020,hong_sian_2019}, a Monte-Carlo algorithm with user-specified probability of correctness. To remedy non-identifiable cases, the algorithm based on \cite{ovchinnikov2020computing,ovchinnikov2020multi} provides a way to find functions of parameters that are globally identifiable. To maximize performance, we will showcase how algorithm for identifiable combinations can utilize individual parameter identifiability properties. We will present the application by applying it to several pharmacological ODE models.
 
 The authors are grateful to CCiS at CUNY Queens College. This work was partially supported by the NSF under grants CCF-1563942, CCF-1564132, DMS-1760448, DMS-1853650, and DMS-1853482
 \printbibliography{}
