@@ -23,7 +23,8 @@
 \documentclass[final,hyperref={pdfpagelabels=false}]{beamer}
 
 \usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter} % Use the beamerposter package for laying out the poster with a portrait orientation and an a0 paper size
-
+\usepackage[backend=biber,maxbibnames=9]{biblatex}
+\addbibresource{bibliography.bib}
 \usetheme{I6pd2} % Use the I6pd2 theme supplied with this template
 
 \usepackage[english]{babel} % English language/hyphenation
@@ -45,7 +46,7 @@
 %	TITLE SECTION 
 %----------------------------------------------------------------------------------------
 
-\title{\huge Unnecessarily Complicated Research Title} % Poster title
+\title{\huge Structural Identifiability via the Web App:\\A Maple Cloud Toolbox} % Poster title
 
 \author{John Smith, James Smith and Jane Smith} % Author(s)
 
@@ -55,7 +56,7 @@
 %	FOOTER TEXT
 %----------------------------------------------------------------------------------------
 
-\newcommand{\leftfoot}{http://www.LaTeXTemplates.com} % Left footer text
+\newcommand{\leftfoot}{https://iliailmer.github.io} % Left footer text
 
 \newcommand{\rightfoot}{john@smith.com} % Right footer text
 
@@ -133,68 +134,57 @@
             %	MATERIALS
             %----------------------------------------------------------------------------------------
 
-            \begin{block}{Materials}
-
-                \begin{columns} % Subdivide the first main column
-                    \begin{column}{.54\textwidth} % The first subdivided column within the first main column
-                        \begin{itemize}
-                            \item Vestibulum nisl, quis euismod velit eros in ligula.
-                                  \begin{itemize}
-                                      \item Cras rhoncus quam et augue convallis in elementum urna tincidunt.
-                                  \end{itemize}
-                            \item Proin ut vestibulum augue.
-                                  \begin{itemize}
-                                      \item Donec dapibus sagittis neque eu ultrices.
-                                  \end{itemize}
-                        \end{itemize}
-                    \end{column}
-
-                    \begin{column}{.43\textwidth} % The second subdivided column within the first main column
-                        \centering
-                        \begin{figure}
-                            \includegraphics[width=0.8\linewidth]{logo.png}
-                            \caption{Figure caption}
-                        \end{figure}
-                    \end{column}
-                \end{columns} % End of the subdivision
+            \begin{block}{Web Based Identifiability Toolbox \cite{ilmer_web-based_2021}}
 
                 \begin{itemize}
-                    \item Curabitur sapien ligula, faucibus in feugiat quis, vestibulum a turpis.
-                          \begin{itemize}
-                              \item Phasellus quis nunc neque. Suspendisse mauris diam, suscipit non gravida in, placerat id enim. Ut nec ipsum in lectus ultrices sagittis.
-                              \item Ut nec ipsum in lectus ultrices sagittis.
-                              \item Phasellus quis nunc neque.
-                          \end{itemize}
-                \end{itemize}
+                    \item All-in-one solution available at \url{https://maple.cloud/app/6509768948056064/}
+                    \item Implements algorithms for individual parameters' global identifiability \cite{hong_sian_2019}.
+                    \item Capable of finding \emph{single-} and \emph{multi-}experiment identifiable combinations of parameters according \cite{ovchinnikov2020computing,ovchinnikov2020multi}.
+                    \item We will refer to these identifiability types as SE and ME, respectively.
+                \end{itemize} % End of the subdivision
 
+                % The algorithms included in the toolbox 
             \end{block}
 
             %----------------------------------------------------------------------------------------
             %	METHODS
             %----------------------------------------------------------------------------------------
 
-            \begin{block}{Methods}
+            \begin{block}{Input Format}
 
                 \begin{itemize}
-                    \item Maecenas Vel Nisl Elit
-                          \begin{itemize}
-                              \item Suspendisse potenti. Fusce a est eget turpis rhoncus varius sed sed dui. Cras justo nibh, bibendum a cursus eget, consequat et dui. Maecenas vel nisl elit, sed dignissim dolor.
-                              \item In hac habitasse platea dictumst.
-                          \end{itemize}
-
-                    \item Viewpoint Matching Constraints
-                          \begin{itemize}
-                              \item Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                              \item Proin in nisi diam.
-                              \item Nam ultricies pellentesque nunc, ultrices volutpat nisl ultrices a.
-                          \end{itemize}
-
-                    \item Volutpat
-                          \begin{itemize}
-                              \item Duis semper lorem eget dui dignissim porttitor.
-                              \item Nulla facilisi. In ullamcorper lorem quis dolor.
-                          \end{itemize}
+                    \item Both individual parameter identifiability and identifiable combinations algorithms accept the same input format:
+                          \[\Sigma:=\begin{cases}
+                                  \mathbf{x}'=\mathbf{f}(\mathbf{x},\boldsymbol{\mu}, \mathbf{u}), \\
+                                  \mathbf{y}=\mathbf{g}(\mathbf{x}, \boldsymbol{\mu}, \mathbf{u}).
+                              \end{cases}\]
+                          \(\mathbf{f}=(f_1, \dots, f_n)\) and \(\mathbf{g}=(g_1,\dots,g_n)\) are tuples of rational functions with coefficients in \(\mathbb{C}\). Here \(\mathbf{x}, \boldsymbol{\mu}, \mathbf{y}, \mathbf{u}\) are states, parameters, outputs, and inputs, respectively.
+                    \item Individual parameter results are guaranteed with user-fixed probability of correctness (0.99 by default)
+                    \item The combination-wise result is deterministic.
+                    \item Lengthy symbolic computing can be sped up via individual parameter \emph{bypass}: if all parameters are globally identifiable we treat them as trivial identifiable combinations
                 \end{itemize}
+
+            \end{block}
+            \begin{block}{Table: Timings}
+
+                \begin{itemize}
+                    \item Timing of built-in ODE examples
+                \end{itemize}
+                \begin{table}[htbp] % h:here; t:top; b:bottom; p:page; default:ht
+                    \centering
+                    \begin{tabular}{lccc}
+                        \hline
+                        Name                                             & SIAN & ME    & SE                  \\\hline\hline
+                        {\tt Biohydrogenation}                           & 3.8  & 160.9 & 160.9               \\
+                        {\tt Treatment}                                  & 2.7  & 1.5   & 1.5                 \\
+                        {\tt Tumor}                                      & 6.8  & 0.0   & 0.0                 \\
+                        {\tt Chemical Reaction Network}                  & 6.0  & 0.0   & 0.0\footnotemark[8] \\
+                        {\tt Chemical Reaction Network} (without bypass) & 5.0  & 390.2 & 390.2               \\
+                        \hline
+                    \end{tabular}
+                    \caption{CPU Times with bypass for some of the built-in examples}
+                    \label{tab:def}
+                \end{table}
 
             \end{block}
 
@@ -202,21 +192,21 @@
             %	MATHEMATICAL SECTION
             %----------------------------------------------------------------------------------------
 
-            \begin{block}{Mathematical Section}
+            % \begin{block}{Mathematical Section}
 
-                \begin{itemize}
-                    \item Maecenas Ultricies Feugiat Velit Non Mattis.
-                          \begin{itemize}
-                              \item Duis ante erat, bibendum nec tempus nec, interdum quis est. Nulla at mollis tortor. Phasellus quis leo dolor, aliquam laoreet orci $X$ Donec dapibus sagittis neque eu nec, interdum quis est. $Y_n, n=1,\cdots,N$ ndum nec tempus nec, interd
-                                    \begin{align*}
-                                        X \rightarrow r(X) & = \arg \max_{c} \Big\{ \max_n \big\{ \sum_{x_i \in X} \delta(x_i,Y_{n,c})\big\} \Big\}
-                                    \end{align*}
-                              \item Cras faucibus scelerisque cursus. Proin ut vestibulum augue. $\delta(x_i,Y_{n,c})$
-                          \end{itemize}
-                    \item Fusce tempus arcu id ligula varius dictum. Donec ut nisl dui, ac consectetur elit. In nec enim porta augue venenatis sollicitudin. Phasellus quis nunc neque. Suspendisse mauris diam, suscipit non gravida in, placerat id enim. Ut nec ipsum in lectus ultrices sagittis.
-                \end{itemize}
+            %     \begin{itemize}
+            %         \item Maecenas Ultricies Feugiat Velit Non Mattis.
+            %               \begin{itemize}
+            %                   \item Duis ante erat, bibendum nec tempus nec, interdum quis est. Nulla at mollis tortor. Phasellus quis leo dolor, aliquam laoreet orci $X$ Donec dapibus sagittis neque eu nec, interdum quis est. $Y_n, n=1,\cdots,N$ ndum nec tempus nec, interd
+            %                         \begin{align*}
+            %                             X \rightarrow r(X) & = \arg \max_{c} \Big\{ \max_n \big\{ \sum_{x_i \in X} \delta(x_i,Y_{n,c})\big\} \Big\}
+            %                         \end{align*}
+            %                   \item Cras faucibus scelerisque cursus. Proin ut vestibulum augue. $\delta(x_i,Y_{n,c})$
+            %               \end{itemize}
+            %         \item Fusce tempus arcu id ligula varius dictum. Donec ut nisl dui, ac consectetur elit. In nec enim porta augue venenatis sollicitudin. Phasellus quis nunc neque. Suspendisse mauris diam, suscipit non gravida in, placerat id enim. Ut nec ipsum in lectus ultrices sagittis.
+            %     \end{itemize}
 
-            \end{block}
+            % \end{block}
 
             %----------------------------------------------------------------------------------------
 
@@ -230,52 +220,15 @@
             %	RESULTS
             %----------------------------------------------------------------------------------------
 
-            \begin{block}{Results: Table}
 
-                \begin{itemize}
-                    \item Ased Aliquet Luctus Lectus
-                \end{itemize}
-
-                \begin{table}
-                    \begin{tabular}{l l l}
-                        \toprule
-                        \textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2} \\
-                        \midrule
-                        Treatment 1         & 0.0003262           & 0.562               \\
-                        Treatment 2         & 0.0015681           & 0.910               \\
-                        Treatment 3         & 0.0009271           & 0.296               \\
-                        \bottomrule
-                    \end{tabular}
-                    \caption{Table caption}
-                \end{table}
-
-                \begin{itemize}
-                    \item Sollicitudin Vel Orci
-                    \item Maecenas Ultricies Feugiat Velit Non Mattis.
-                \end{itemize}
-
-                \begin{table}
-                    \begin{tabular}{l l l}
-                        \toprule
-                        \textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2} \\
-                        \midrule
-                        Treatment 1         & 0.0003262           & 0.562               \\
-                        Treatment 2         & 0.0015681           & 0.910               \\
-                        Treatment 3         & 0.0009271           & 0.296               \\
-                        \bottomrule
-                    \end{tabular}
-                    \caption{Table caption}
-                \end{table}
-
-            \end{block}
 
             %------------------------------------------------
 
-            \begin{block}{Results: Figure}
+            \begin{block}{Screenshot}
 
                 \begin{figure}
-                    \includegraphics[width=0.5\linewidth]{logo.png}
-                    \caption{Figure caption}
+                    \includegraphics[width=\linewidth]{screenshot.png}
+                    \caption{Screenshot of the web-application.}
                 \end{figure}
 
             \end{block}
@@ -284,13 +237,16 @@
             %	CONCLUSION
             %----------------------------------------------------------------------------------------
 
-            \begin{block}{Conclusion}
-
+            \begin{block}{Final Remarks}
+                Our program provides:
                 \begin{itemize}
-                    \item Opet volutpat ligula. Duis semper lorem eget dui dignissim porttitor. Nulla facilisi. In ullamcorper lorem quis dolor iaculis nec egestas enim ultricies. Cras ut mauris elit, ut lacinia dui. Proin in ante et libero hendrerit iaculis.
-                    \item Nulla eu erat a urna laoreet auctor id a turpis. Nam mollis tristique neque eu luctus. Suspendisse rutrum congue nisi sed convallis.
-                    \item Aenean id neque dolor.
-                    \item Opet volutpat ligula. Duis semper lorem eget dui dignissim porttitor. Nulla facilisi. In ullamcorper lorem quis dolor iaculis nec egestas enim ultricies. Cras ut mauris elit, ut lacinia dui. Proin in ante et libero hendrerit iaculis.
+                    \item Fast identifiability analysis without requiring any installations.
+                    \item Low overhead of individual parameter identifiability can accelerate finding identifiable combination.
+                \end{itemize}
+                Some future work includes:
+                \begin{itemize}
+                    \item Computing characteristic sets via {\tt DifferentialAlgebra} (\cite{boulier2004blad}) is still an overhead.
+                    \item We are investigating differential Thomas decomposition for single- and multi-experiment identifiability problems~\cite{gerdt2019maple}.
                 \end{itemize}
 
             \end{block}
@@ -301,9 +257,9 @@
 
             \begin{block}{References}
 
-                \nocite{*} % Insert publications even if they are not cited in the poster
-                \small{\bibliographystyle{unsrt}
-                    \bibliography{sample}}
+                % \nocite{*} % Insert publications even if they are not cited in the poster
+                \small{%\bibliographystyle{unsrt}
+                    \printbibliography{}}
 
             \end{block}
 
@@ -314,7 +270,8 @@
             \begin{block}{Acknowledgments}
 
                 \begin{itemize}
-                    \item Nam mollis tristique neque eu luctus. Suspendisse rutrum congue nisi sed convallis. Aenean id neque dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    \item The authors are grateful to CCiS at CUNY Queens College. This work was partially supported by the NSF under grants CCF-1563942, CCF-1564132, DMS-1760448, DMS-1853650, and DMS-1853482
+
                 \end{itemize}
 
             \end{block}
@@ -323,14 +280,14 @@
             %	CONTACT INFORMATION
             %----------------------------------------------------------------------------------------
 
-            \setbeamercolor{block title}{fg=black,bg=orange!70} % Change the block title color
+            \setbeamercolor{block title}{fg=black,bg=orange!90} % Change the block title color
 
             \begin{block}{Contact Information}
 
                 \begin{itemize}
-                    \item Web: \href{http://www.university.edu/smithlab}{http://www.university.edu/smithlab}
-                    \item Email: \href{mailto:john@smith.com}{john@smith.com}
-                    \item Phone: +1 (000) 111 1111
+                    \item Web: \href{https://iliailmer.github.io}{https://iliailmer.github.io}
+                    \item Email: \href{mailto:iilmer@gradcenter.cuny.edu}{iilmer@gradcenter.cuny.edu}
+                          % \item Phone: +1 (000) 111 1111
                 \end{itemize}
 
             \end{block}
